@@ -1,0 +1,27 @@
+<label>No HP</label>
+<input type="text" style="font-size: 35px;" id="txtno"><br>
+<label>Pesan</label>
+<input type="text" style="font-size: 35px;" id="txtpesan"><br>
+<button type="button" style="font-size: 35px;" onclick="kirim()">Kirim Pesan Ke WA</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function kirim(){
+        let nomor = $("#txtno").val();
+        let pesan = $("#txtpesan").val();
+
+        $.ajax({
+            url: "http://localhost:3000/kirimpesan",
+            method: "POST",
+            data: {nomor: nomor, pesan: pesan},
+            cache: "false",
+            success: function(x){
+                let data = JSON.parse(JSON.stringify(x));
+                alert(data.status);
+            },
+			error: function(){
+				alert("Tidak Terhubung dengan Server");
+			}
+		})
+    }
+</script>
